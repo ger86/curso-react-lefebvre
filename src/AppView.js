@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import 'App.css';
 
 export default function AppView({
-  form: { name, email, message },
+  form: { name, job, message },
   onInputChange,
   onSubmit,
   onClickReset,
@@ -18,9 +18,9 @@ export default function AppView({
       </div>
       <div>
         <p>
-          <label>Email</label>
+          <label>Trabajo</label>
         </p>
-        <input type="text" value={email} onChange={onInputChange} name="email" />
+        <input type="text" value={job} onChange={onInputChange} name="job" />
       </div>
       <div>
         <p>
@@ -38,7 +38,7 @@ export default function AppView({
 AppView.propTypes = {
   form: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
+    job: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
   }).isRequired,
   onInputChange: PropTypes.func.isRequired,

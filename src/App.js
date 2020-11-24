@@ -4,7 +4,7 @@ import AppView from './AppView';
 function reducer(state, action) {
   const {type, payload} = action;
   if (type === 'ON_CHANGE_INPUT') {
-    const lastForm = state[state.length -1];
+    const lastForm = state[state.length - 1];
     return [
       ...state,
       {
@@ -13,23 +13,27 @@ function reducer(state, action) {
       }
     ];
   } else if (type === 'RESET_FORM') {
-    return [{
-      name: '',
-      email: '',
-      message: ''
-    }];
-  } else if(type === 'UNDO') {
+    return [
+      {
+        name: '',
+        job: '',
+        message: ''
+      }
+    ];
+  } else if (type === 'UNDO') {
     return state.slice(0, state.length - 1);
   }
   return state;
 }
 
 function App() {
-  const [form, dispatch] = useReducer(reducer, [{
-    name: '',
-    email: '',
-    message: ''
-  }]);
+  const [form, dispatch] = useReducer(reducer, [
+    {
+      name: '',
+      job: '',
+      message: ''
+    }
+  ]);
 
   function handleInputChange(event) {
     dispatch({
@@ -46,9 +50,20 @@ function App() {
     });
   }
 
-  function onSubmit(event) {
+  async function onSubmit(event) {
     event.preventDefault();
-    alert(`${form.name} ${form.email} ${form.message}`);
+    try {
+      const response = await fetch('https://reqres.in/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(form[form.length - 1])
+      });
+      alert(response.status);
+    } catch (error) {
+      alert(error);
+    }
   }
 
   function undo(event) {
