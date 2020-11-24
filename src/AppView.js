@@ -1,21 +1,46 @@
 import PropTypes from 'prop-types';
 import 'App.css';
-import Button from 'components/UI/Button';
 
-export default function AppView({handleClick, count, onChangeText, text}) {
+export default function AppView({
+  name,
+  onChangeName,
+  email,
+  onChangeEmail,
+  message,
+  onChangeMessage,
+  onSubmit
+}) {
   return (
-    <div className="App">
-      <Button onClick={handleClick} text="Incrementar" />
-      <p>Mi contador: {count}</p>
-      <input type="text" value={text} onChange={onChangeText} id="input" />
-      <p>Texto: {text}</p>
-    </div>
+    <form onSubmit={onSubmit}>
+      <div>
+        <p>
+          <label>Nombre</label>
+        </p>
+        <input type="text" value={name} onChange={onChangeName} />
+      </div>
+      <div>
+        <p>
+          <label>Email</label>
+        </p>
+        <input type="text" value={email} onChange={onChangeEmail} />
+      </div>
+      <div>
+        <p>
+          <label>Mensaje</label>
+        </p>
+        <textarea onChange={onChangeMessage}>{message}</textarea>
+      </div>
+      <button type="submit">Enviar</button>
+    </form>
   );
 }
 
 AppView.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  count: PropTypes.number.isRequired,
-  onChangeText: PropTypes.func.isRequired,
-  text: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  onChangeName: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
+  onChangeEmail: PropTypes.func.isRequired,
+  message: PropTypes.string.isRequired,
+  onChangeMessage: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
