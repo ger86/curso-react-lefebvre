@@ -4,7 +4,9 @@ import 'App.css';
 export default function AppView({
   form: { name, email, message },
   onInputChange,
-  onSubmit
+  onSubmit,
+  onClickReset,
+  onClickUndo
 }) {
   return (
     <form onSubmit={onSubmit}>
@@ -27,6 +29,8 @@ export default function AppView({
         <textarea name="message" onChange={onInputChange} value={message} />
       </div>
       <button type="submit">Enviar</button>
+      <button onClick={onClickReset}>Resetear</button>
+      <button onClick={onClickUndo}>Deshacer</button>
     </form>
   );
 }
@@ -39,4 +43,6 @@ AppView.propTypes = {
   }).isRequired,
   onInputChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  onClickReset: PropTypes.func.isRequired,
+  onClickUndo: PropTypes.func.isRequired,
 };
