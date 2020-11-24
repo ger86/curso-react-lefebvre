@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from 'react';
+import AppView from './AppView';
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [text, setText] = useState('placeholder');
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  function onChangeText(event) {
+    setText(event.target.value);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppView handleClick={handleClick} count={count} onChangeText={onChangeText} text={text} />
   );
 }
 
