@@ -2,12 +2,8 @@ import PropTypes from 'prop-types';
 import 'App.css';
 
 export default function AppView({
-  name,
-  onChangeName,
-  email,
-  onChangeEmail,
-  message,
-  onChangeMessage,
+  form: { name, email, message },
+  onInputChange,
   onSubmit
 }) {
   return (
@@ -16,19 +12,19 @@ export default function AppView({
         <p>
           <label>Nombre</label>
         </p>
-        <input type="text" value={name} onChange={onChangeName} />
+        <input type="text" value={name} onChange={onInputChange} name="name" />
       </div>
       <div>
         <p>
           <label>Email</label>
         </p>
-        <input type="text" value={email} onChange={onChangeEmail} />
+        <input type="text" value={email} onChange={onInputChange} name="email" />
       </div>
       <div>
         <p>
           <label>Mensaje</label>
         </p>
-        <textarea onChange={onChangeMessage}>{message}</textarea>
+        <textarea name="message" onChange={onInputChange} value={message} />
       </div>
       <button type="submit">Enviar</button>
     </form>
@@ -36,11 +32,11 @@ export default function AppView({
 }
 
 AppView.propTypes = {
-  name: PropTypes.string.isRequired,
-  onChangeName: PropTypes.func.isRequired,
-  email: PropTypes.string.isRequired,
-  onChangeEmail: PropTypes.func.isRequired,
-  message: PropTypes.string.isRequired,
-  onChangeMessage: PropTypes.func.isRequired,
+  form: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
+  }).isRequired,
+  onInputChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
